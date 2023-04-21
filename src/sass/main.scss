@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+/* primary colors */
+$Cyan     : hsl(178, 100%, 50%);
+$Soft-blue: hsl(215, 51%, 70%);
+
+/* neutral colors */
+$White              : hsl(0, 0%, 100%);
+$Very-dark-blue-bg  : hsl(217, 54%, 11%); //main bg
+$Very-dark-blue-card: hsl(216, 50%, 16%); //card bg
+$Very-dark-blue-line: hsl(215, 32%, 27%); // line
+
+/* font */
+$Outfit: 'Outfit',
+sans-serif;
+
+/* mixins */
+@mixin flex() {
+    display        : flex;
+    align-items    : center;
+    flex-direction : column;
+    justify-content: center;
+}
+
+* {
+    margin    : 0;
+    padding   : 0;
+    box-sizing: border-box;
+}
+
+body {
+    @include flex();
+    padding         : 1.5em;
+    font-size       : 18px;
+    min-height      : 100vh;
+    font-family     : $Outfit;
+    background-color: $Very-dark-blue-bg;
+
+    .card {
+        @include flex();
+        gap             : 1em;
+        color           : $White;
+        padding         : 1.3em;
+        box-shadow      : 0px 42px 19px 15px rgba(0, 0, 0, 0.1);
+        border-radius   : 1em;
+        background-color: $Very-dark-blue-card;
+
+        .card__nftImg {
+            cursor  : pointer;
+            position: relative;
+
+            .nft {
+                border-radius: .6em;
+            }
+
+            /* overlay */
+            .nft__overlay {
+                top             : 0;
+                left            : 0;
+                width           : 100%;
+                height          : calc(100% - .3em);
+                content         : '';
+                opacity         : 0;
+                position        : absolute;
+                border-radius   : .6em;
+                background-color: $Cyan;
+            }
+
+            .view {
+                top      : 50%;
+                left     : 50%;
+                opacity  : 0;
+                position : absolute;
+                transform: translate(-50%, -50%);
+            }
+
+            &:hover {
+                .nft__overlay {
+                    opacity: .5;
+                }
+
+                .view {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .card__nftInfo {
+            h1 {
+                font-size    : 1.2em;
+                margin-bottom: 1rem;
+
+                &:hover {
+                    color: $Cyan;
+                }
+
+                cursor: pointer;
+            }
+
+            p {
+                color        : $Soft-blue;
+                font-size    : 1rem;
+                line-height  : 1.7rem;
+                font-weight  : 100;
+                margin-bottom: 1rem;
+            }
+
+            .nftInfo__price {
+                @include flex();
+                flex-direction : row;
+                justify-content: space-between;
+
+                .price__daysLeft,
+                .price__eth {
+                    @include flex();
+                    gap           : .3rem;
+                    font-size     : 1rem;
+                    flex-direction: row;
+                }
+
+                .price__eth {
+                    color: $Cyan;
+                }
+
+                .price__daysLeft {
+                    color: $Soft-blue;
+                }
+            }
+        }
+
+        hr {
+            border: .8px solid $Very-dark-blue-line;
+        }
+
+        .card__nftFooter {
+            @include flex();
+            width          : 100%;
+            font-size      : 1rem;
+            flex-direction : row;
+            justify-content: flex-start;
+
+            img {
+                width        : 30px;
+                border       : 1px solid $White;
+                margin-right : 1rem;
+                border-radius: 50%;
+            }
+
+            p {
+                color: $Soft-blue;
+
+                span {
+                    color: $White;
+
+                    &:hover {
+                        color: $Cyan;
+                    }
+
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+/* media query desktop */
+
+@media screen and (min-width: 768px) {
+    body {
+        padding: 2em;
+
+        .card {
+            width: 350px;
+        }
+    }
+}
